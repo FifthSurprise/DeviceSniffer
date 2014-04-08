@@ -23,9 +23,10 @@ class DeviceController < ApplicationController
       d = Device.find_by(macaddress: mac)
       #create a device entry from the macaddress
       if d.nil?
-        d = Device.create(:macaddress => mac, :rssi => c['rssi'])
+        d = Device.create(:macaddress => mac, :rssi => c['rssi'], :updates=>1)
       else
         d.updated_at = Time.now
+        d.updates+=1
         d.save
       end
       # logger.info "client #{c['client_mac']} seen on ap #{c['ap_mac']} with rssi #{c['rssi']} at #{c['last_seen']}"
