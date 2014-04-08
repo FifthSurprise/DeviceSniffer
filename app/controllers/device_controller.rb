@@ -18,7 +18,7 @@ class DeviceController < ApplicationController
     #   return
     # end
     map['probing'].each do |c|
-      mac = c['client_mac'].sub(%r[ UTC (\d+)],"")
+      mac = c['client_mac'].sub(%r[ (.+) UTC (\d+)],"")
 
       d = Device.find_by(macaddress: mac)
       #create a device entry from the macaddress
