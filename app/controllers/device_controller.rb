@@ -18,10 +18,12 @@ class DeviceController < ApplicationController
     #   return
     # end
     map['probing'].each do |c|
-      d = Device.find_by(macaddress: c['client_mac'])
+      mac = c['client_mac'].sub(%r[ UTC (\d+)],"")
+
+      d = Device.find_by(macaddress: mac)
       #create a device entry from the macaddress
       if d.nil?
-        d = Device.create(:macaddress => c['client_mac'], :rssi => c['rssi'])
+        d = Device.create(:macaddress => mac, :rssi => c['rssi'])
       else
         d.updated_at = Time.now
       end
