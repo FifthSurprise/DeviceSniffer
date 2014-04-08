@@ -17,4 +17,7 @@ class Device < ActiveRecord::Base
     response.body == "" ? "" : JSON.parse(response.body).first["company"]
 
   end
+  def self.reset_visits
+    Device.update_all(updates: 1)
+  end
 end

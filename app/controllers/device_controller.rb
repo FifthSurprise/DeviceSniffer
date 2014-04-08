@@ -25,9 +25,11 @@ class DeviceController < ApplicationController
       if d.nil?
         d = Device.create(:macaddress => mac, :rssi => c['rssi'], :updates=>1)
       else
-        d.updated_at = Time.now
-        d.updates+=1
-        d.save
+        if d.updated_at + 30 > Time.now
+          d.updated_at = Time.now
+          d.updates+=1
+          d.save
+        end
       end
       # logger.info "client #{c['client_mac']} seen on ap #{c['ap_mac']} with rssi #{c['rssi']} at #{c['last_seen']}"
     end
@@ -38,4 +40,5 @@ class DeviceController < ApplicationController
     @count = Device.total_Count
     @events= Device.top_hundred
   end
+
 end
