@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408191321) do
+ActiveRecord::Schema.define(version: 20140408200252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20140408191321) do
     t.string   "rssi"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "updates",    default: 0
+    t.integer  "updates",    default: 1
   end
 
 end
