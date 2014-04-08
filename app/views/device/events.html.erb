@@ -1,12 +1,10 @@
 <h1>Total Mac Addresses: <%=@count%></h1>
-
 <table>
   <tr>
     <th>Mac Address</th>
     <th>RSSI</th>
     <th>Visited</th>
   </tr>
- 
 <% @events.each do |event| %>
   <tr>
     <td><%= event.macaddress %></td>
