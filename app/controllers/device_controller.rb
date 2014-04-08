@@ -36,6 +36,6 @@ class DeviceController < ApplicationController
 
   def events
     @count = Device.total_Count
-    @events=Device.all
+    @events= Device.top_hundred
   end
 end
