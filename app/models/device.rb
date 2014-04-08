@@ -4,6 +4,6 @@ class Device < ActiveRecord::Base
   end
 
   def self.top_hundred
-    Device.order('updates').limit(100)
+    Device.order(updates: :desc).limit(100)
   end
 end
