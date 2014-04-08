@@ -4,10 +4,11 @@ class DeviceController < ApplicationController
 
   def event
     @validator = "2a70b50ea6b2095b5f79c9874c9352040ccdedc1"
-    respond_to do |format|
-      format.html
-      format.json { render :text => "#{@validator}" }
-    end
+    render :text => @validator
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render :text => "#{@validator}" }
+    # end
   end
 
   def postevent
