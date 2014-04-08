@@ -12,10 +12,10 @@ class DeviceController < ApplicationController
 
   def postevent
     map = JSON.parse(params[:data])
-    if map['secret'] != SECRET
-      logger.warn "got post with bad secret: #{SECRET}"
-      return
-    end
+    # if map['secret'] != SECRET
+    #   logger.warn "got post with bad secret: #{SECRET}"
+    #   return
+    # end
     map['probing'].each do |c|
       d = Device.find_by(macaddress: c['client_mac'])
       #create a device entry from the macaddress
