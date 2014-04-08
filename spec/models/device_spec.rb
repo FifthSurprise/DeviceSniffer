@@ -7,7 +7,7 @@ describe Device do
   end
   it 'handles searching mac address that does not exist' do
   d = Device.create(:macaddress => "00:awiefj", :rssi => "27")
-  binding.pry
+  expect(d.manufacturer).to eq ("")
   end
 end
 

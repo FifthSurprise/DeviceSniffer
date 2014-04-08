@@ -12,7 +12,7 @@ describe DeviceController do
                                "client_mac"=>"8c:58:37:1d:f4:49 20:36:04.396 UTC 2013",
                                "rssi"=>"22"}]
                    }.to_json
-                   expect(Device.last.macaddress).to eq("8c:58:37:1d:f4:49 20:36:04.396 UTC 2013")
+                   expect(Device.last.macaddress).to eq("8c:58:37:1d:f4:49")
     end
   end
 end
