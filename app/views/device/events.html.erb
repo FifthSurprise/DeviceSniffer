@@ -1,0 +1,8 @@
+<ol>
+  <%@events.each do |event|%>
+    <li>Mac Address:<%=event.macaddress%><br>
+        RSSI:<%=event.rssi%><br>
+        Visited:<%=event.updates%><br>
+    </li>
+  <%end%>
+</ol>

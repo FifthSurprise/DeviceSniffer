@@ -33,4 +33,8 @@ class DeviceController < ApplicationController
     end
     redirect_to '/event'
   end
+
+  def events
+    @events=Device.all
+  end
 end
