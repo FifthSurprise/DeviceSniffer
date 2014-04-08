@@ -35,7 +35,7 @@ class DeviceController < ApplicationController
   end
 
   def events
-    @count = Device.totalcount
+    @count = Device.total_Count
     @events=Device.all
   end
 end
