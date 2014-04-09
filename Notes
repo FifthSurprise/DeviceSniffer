@@ -1,0 +1,16 @@
+Notes
+
+-  Dashboard objects based upon time (how many in last hour, last day, overall)
+-  Make user table/objects for when users show up
+  - Update controller so every time see user, save that particular event in separate table
+-  Badges/Achievement table?
+  -  Longest streak per day
+  -  frequent pings (hyperactive)
+  -  Earliest/ Latest
+-  Update Manufacturers to use top values.
+-  Pie chart widget
+-  Last achievement awarded --> submitted as a request to the dashboard
+-  Flatiron tweets?
+
+
+Device.find_by(:macaddress => "5c:0a:5b:4d:b9:72").updated_at.in_time_zone("Eastern Time (US & Canada)")
