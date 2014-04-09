@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+gem 'dashing-rails'
+gem 'puma'
+
 
 ruby "2.1.0"
 
