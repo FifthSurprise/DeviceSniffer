@@ -14,7 +14,7 @@ Dashing.scheduler.every '5s' do
 
   
   #top_manufacturers  = [{:label=>"Apple", :value=>50}, { :label=>"HTC", :value=>20}, {:label=>'Samsung', :value=>22}]
-  top_manufacturers=[]
-  top_manufacturers<<Device.manufacturers_dashboard
+  # top_manufacturers=[]
+  top_manufacturers=Device.manufacturers_dashboard
   Dashing.send_event('top3manufacturers', {items: top_manufacturers})
 end
