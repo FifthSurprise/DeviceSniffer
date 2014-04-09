@@ -4,12 +4,14 @@
     <th>Mac Address</th>
     <th>RSSI</th>
     <th>Visited</th>
+    <th>Company</th>
   </tr>
   <% @events.each do |event| %>
     <tr>
     <td><%= event.macaddress %></td>
     <td><%= event.rssi %></td>
     <td><%= event.updates %></td>
+    <td><%= event.get_manufacturer %></td>
   </tr>
   <% end %>
 </table>

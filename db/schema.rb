@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408200252) do
+ActiveRecord::Schema.define(version: 20140409141733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "devices", force: true do |t|
     t.string   "macaddress"
@@ -22,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140408200252) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "updates",    default: 1
+    t.string   "company"
   end
 
 end
