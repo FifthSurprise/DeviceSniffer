@@ -13,6 +13,8 @@ Dashing.scheduler.every '5s' do
   Dashing.send_event('macaddresses',   { value: Device.total_Count })
 
   
-  buzz  = [{:label=>"Apple", :value=>50}, { :label=>"HTC", :value=>20}, {:label=>'Samsung', :value=>22}]
-  Dashing.send_event('top3devices', {items: buzz})
+  #top_manufacturers  = [{:label=>"Apple", :value=>50}, { :label=>"HTC", :value=>20}, {:label=>'Samsung', :value=>22}]
+  top_manufacturers=[]
+  top_manufacturers<<Dashing.companies[0..2]
+  Dashing.send_event('top3manufacturers', {items: top_manufacturers})
 end
