@@ -7,7 +7,7 @@ class Device < ActiveRecord::Base
   def self.manufacturers_dashboard
     top_manufacturers = []
     Device.companies.each do |c|
-      top_manufacturers.push({:label=> c, :value => Device.select("company = '#{c}'").count})
+      top_manufacturers.push({:label=> c, :value => Device.where("company = '#{c}'").count})
     end
     return top_manufacturers
   end
