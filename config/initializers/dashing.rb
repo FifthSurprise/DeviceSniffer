@@ -1,5 +1,7 @@
 # Use this hook to configure Dashing bahaviors.
 Dashing.configure do |config|
+  uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/" )
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   # Scheduler instance.
   # config.scheduler = ::Rufus::Scheduler.new
 
@@ -8,7 +10,7 @@ Dashing.configure do |config|
   # config.redis_host     = '127.0.0.1'
   # config.redis_port     = '6379'
   # config.redis_password = nil
-
+  #
   # Redis namespace when pushing new data.
   # config.redis_namespace = 'dashing_events'
 
