@@ -1,5 +1,6 @@
 Notes
 
+-  Get column in device for ignore
 -  Dashboard objects based upon time (how many in last hour, last day, overall)
 -  Make user table/objects for when users show up
   - Update controller so every time see user, save that particular event in separate table
