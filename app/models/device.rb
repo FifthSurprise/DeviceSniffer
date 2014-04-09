@@ -21,7 +21,7 @@ class Device < ActiveRecord::Base
   end
 
   def self.companies
-    Device.select("company").group("company").map{|i|i.company}.compact
+    Device.where("company != ''").select("company").group("company").map{|i|i.company}
   end
 
   def get_manufacturer
