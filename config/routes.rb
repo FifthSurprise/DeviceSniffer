@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'event' => 'device#event'
   get 'postevent' => 'device#event'
   post 'postevent' => 'device#postevent'
 
