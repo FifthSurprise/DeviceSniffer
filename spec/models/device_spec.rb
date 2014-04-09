@@ -21,4 +21,12 @@ describe Device do
     d.get_manufacturer
     expect(d.company).to eq ("")
   end
+
+  it 'keeps track of the various companies' do
+    Device.create(:macaddress => "68:94:23:80:d9:61", :rssi => "27").get_manufacturer
+    Device.create(:macaddress => "00:18:0a:36:b6:2e", :rssi => "27").get_manufacturer
+    Device.create(:macaddress => "30:8c:fb:5f:ff:f8", :rssi => "27").get_manufacturer
+    expect(Device.companies.size).to eq(3)
+  end
+
 end
