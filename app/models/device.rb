@@ -13,18 +13,22 @@ class Device < ActiveRecord::Base
     animals = File.readlines("lib/naming/animals.txt")
     adjectives = File.readlines("lib/naming/adjectives.txt")
     
-    File.open("lib/naming/names.txt", "w") do |file|
+    [].tap do |names|
       num.times do 
-        to_add = adjectives.sample.strip + "-" + animals.sample.strip + "-"+ "#{rand(10..99)}" +"\n"
-        file.write(to_add)
+        names << adjectives.sample.strip + "-" + animals.sample.strip + "-"+ "#{rand(10..99)}"
       end
     end
   end
   
   def self.get_name
-    self.generate_names(100000) unless File.readlines("lib/naming/names.txt").count > 0
+    names = self.generate_names(3)
+    name = names.sample
     
-    File.readlines("lib/naming/names.txt").sample.strip
+    File.open("lib/naming/names.txt", "a") do |file|
+      file.write(name + "\n")
+    end
+    
+    name
   end
 end
 
