@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'dashing-rails'
 gem 'puma'
-
+gem 'rspec-rails'
 
 ruby "2.1.0"
 
