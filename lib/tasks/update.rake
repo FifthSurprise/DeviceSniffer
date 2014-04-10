@@ -1,6 +1,8 @@
-namespace :update do
-  desc "Updates to database"
-  task manufacturerquery: :environment do
-    Device.where("company is null").each{|d|d.get_manufacturer}
+namespace :db do
+  desc "Updates the companies in database based on mac address look-up"
+  task :update_company => :environment do
+    Device.where(:company => "").each do |d| 
+      d.set_manufacturer 
+    end
   end
 end
