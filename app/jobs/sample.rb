@@ -14,7 +14,8 @@ Dashing.scheduler.every '3s' do
   Dashing.send_event('past_hour',   { value: Device.sightings_past_hour })
   Dashing.send_event('past_day',   { current: Device.sightings_past_day })
   d = Device.last
-  Dashing.send_event('last_MAC', { text: "#{d.company}",
+  company = d.company==""? d.company : "Device Manufacturer Not Found"
+  Dashing.send_event('last_MAC', { text: "#{company}",
                                    moreinfo: "MAC Address: #{d.macaddress}"})
 
   #top_manufacturers  = [{:label=>"Apple", :value=>50}, { :label=>"HTC", :value=>20}, {:label=>'Samsung', :value=>22}]
