@@ -26,7 +26,7 @@ class DeviceController < ApplicationController
         d = Device.create(:macaddress => mac, :rssi => c['rssi'], :updates=>1)
         d.get_manufacturer
       else
-        if d.updated_at + 30 > Time.now
+        if d.updated_at + (30*60) > Time.now
           d.updated_at = Time.now
           d.updates+=1
           d.save

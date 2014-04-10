@@ -7,20 +7,23 @@ class Device < ActiveRecord::Base
 
   def self.sightings_past_hour
     #(Time.now.to_time-1.hours).to_datetime.in_time_zone("Eastern Time (US & Canada)")
-    Device.where(["created_at >= ?", Time.now-3600]).count
+    Device.where(["updated_at >= ?", Time.now-3600]).count
   end
 
   def self.sightings_past_day
-    Device.where(["created_at >= ?", Time.now-86400]).count
+    Device.where(["updated_at >= ?", Time.now-86400]).count
   end
 
   def self.manufacturers_dashboard
     top_manufacturers = []
-    Device.companies.each do |c|
-      top_manufacturers.push({:label=> c, :value => Device.where("company = '#{c}'").count})
+    Device.where("company != ''").group(:company).count.each do |key,value|
+      if (value>100)
+        top_manufacturers.push({:label=> key, :value => value})
+      end
     end
-    
-    top_manufacturers
+    top_manufacturers.sort!{|a,b| b[:value] <=> a[:value]}
+    # top_manufacturers.push(Device.where("company != ''").group(:company).count.delete_if{|key,value| value<0})
+    return top_manufacturers
   end
 
   def self.total_Count
