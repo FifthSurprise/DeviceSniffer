@@ -11,6 +11,9 @@ Dashing.scheduler.every '5s' do
 
   Dashing.send_event('valuation', { current: current_valuation, last: last_valuation })
   Dashing.send_event('macaddresses',   { current: Device.total_Count })
+  Dashing.send_event('past_hour',   { current: Device.sightings_past_hour })
+  Dashing.send_event('past_day',   { current: Device.sightings_past_day })
+
 
   
   #top_manufacturers  = [{:label=>"Apple", :value=>50}, { :label=>"HTC", :value=>20}, {:label=>'Samsung', :value=>22}]

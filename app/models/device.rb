@@ -4,6 +4,15 @@ require 'json'
 
 class Device < ActiveRecord::Base
 
+  def self.sightings_past_hour
+    #(Time.now.to_time-1.hours).to_datetime.in_time_zone("Eastern Time (US & Canada)")
+    Device.where(["created_at >= ?", Time.now-3600]).count
+  end
+
+  def self.sightings_past_day
+    Device.where(["created_at >= ?", Time.now-86400]).count
+  end
+
   def self.manufacturers_dashboard
     top_manufacturers = []
     Device.companies.each do |c|
