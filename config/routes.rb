@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  root 'dashing/dashboards#index'
   mount Dashing::Engine, at: Dashing.config.engine_path
   get 'event' => 'device#event'
   get 'postevent' => 'device#event'
