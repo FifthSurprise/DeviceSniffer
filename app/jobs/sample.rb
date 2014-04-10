@@ -14,8 +14,6 @@ Dashing.scheduler.every '3s' do
   Dashing.send_event('past_hour',   { current: Device.sightings_past_hour })
   Dashing.send_event('past_day',   { current: Device.sightings_past_day })
 
-
-  
   #top_manufacturers  = [{:label=>"Apple", :value=>50}, { :label=>"HTC", :value=>20}, {:label=>'Samsung', :value=>22}]
   # top_manufacturers=[]
   top_manufacturers=Device.manufacturers_dashboard
