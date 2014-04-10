@@ -11,7 +11,7 @@ Dashing.scheduler.every '3s' do
 
   Dashing.send_event('valuation', { current: current_valuation, last: last_valuation })
   Dashing.send_event('macaddresses',   { current: Device.total_Count })
-  Dashing.send_event('past_hour',   { current: Device.sightings_past_hour })
+  Dashing.send_event('past_hour',   { value: Device.sightings_past_hour })
   Dashing.send_event('past_day',   { current: Device.sightings_past_day })
   d = Device.last
   Dashing.send_event('last_MAC', { text: "#{d.company}",
