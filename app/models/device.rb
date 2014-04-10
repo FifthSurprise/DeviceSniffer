@@ -20,7 +20,7 @@ class Device < ActiveRecord::Base
         top_manufacturers.push({:label=> key, :value => value})
       end
     end
-    top_manufacturers.sort!{|a,b| a[:value] <=> b[:value]}
+    top_manufacturers.sort!{|a,b| b[:value] <=> a[:value]}
     # top_manufacturers.push(Device.where("company != ''").group(:company).count.delete_if{|key,value| value<0})
     return top_manufacturers
   end
