@@ -1,8 +1,6 @@
 Rails.application.configure do
   uri = URI.parse("redis://redistogo:df7a0716e0e8151b417adda05741dbdf@barreleye.redistogo.com:11206/" )
-  config.redis_host     = uri.host
-  config.redis_port     = uri.port
-  config.redis_password = uri.password
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   
   config.action_mailer.default_url_options = { host: Rails.application.secrets.host }
   # Settings specified here will take precedence over those in config/application.rb.
