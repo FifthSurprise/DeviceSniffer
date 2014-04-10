@@ -21,9 +21,9 @@ class Device < ActiveRecord::Base
   end
 
   def self.companies
-     []<<Device.where("company != ''").group(:company).count.delete_if{|key,value| value<5}
+     # []<<Device.where("company != ''").group(:company).count.delete_if{|key,value| value<5}
 
-    # Device.where("company != ''").select("company").group("company").map{|i|i.company}
+    Device.where("company != ''").select("company").group("company").map{|i|i.company}
   end
 
   def get_manufacturer
