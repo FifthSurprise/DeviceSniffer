@@ -1,6 +1,7 @@
 require 'uri'
 require 'net/http'
 require 'json'
+require 'mechanize'
 
 class Device < ActiveRecord::Base
 
@@ -34,29 +35,38 @@ class Device < ActiveRecord::Base
   end
 
   def self.companies
-    Device.where("company != ''").select("company").group("company").map{|i|i.company}
+    Device.select("company").group("company").map{ |i| i.company }.compact
   end
-
-  def get_manufacturer
-    if (self.company.nil?)
-      uri = URI.parse("http://www.macvendorlookup.com/api/v2/#{self.macaddress.downcase}")
-      response = Net::HTTP.get_response(uri)
-      if response.body == "" || response.body.nil?
-        self.company = ""
-      else
-        self.company=JSON.parse(response.body).first["company"]
-      end
-      self.save
-    end
-    self.company
-  end
+  
   def self.reset_visits
     Device.update_all(updates: 1)
   end
-  def manufacturer
+  
+  def set_manufacturer
+    if self.company.nil? || self.company == ""
+      self.company = self.get_manufacturer
+    end
+    
+    #in case the above code fails to find the company then company will be ""
+    if self.company == "" 
+      self.company = self.get_manufacturer_from_site
+    end
+    
+    self.save if self.company_changed?
+  end
+  
+  def get_manufacturer
     uri = URI.parse("http://www.macvendorlookup.com/api/v2/#{self.macaddress}")
     response = Net::HTTP.get_response(uri)
-    response.body == "" ? "" : JSON.parse(response.body).first["company"]
+    response.code != "200" ? "" : JSON.parse(response.body).first["company"]
+  end
+  
+  def get_manufacturer_from_site
+    agent = Mechanize.new
+
+    page = agent.get("http://hwaddress.com/?q=#{self.macaddress}")
+    link = page.links[7]
+    link == nil ? "" : link.text
   end
 
   def self.generate_names(num)
@@ -77,6 +87,7 @@ class Device < ActiveRecord::Base
     File.open("lib/naming/names.txt", "a") do |file|
       file.write(name + "\n")
     end
+    
     name
   end
 end
