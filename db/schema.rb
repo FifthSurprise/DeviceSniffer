@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410222043) do
+ActiveRecord::Schema.define(version: 20140411203057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20140410222043) do
 
   create_table "movements", force: true do |t|
     t.string   "macaddress"
-    t.integer  "velocity"
+    t.string   "velocity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
