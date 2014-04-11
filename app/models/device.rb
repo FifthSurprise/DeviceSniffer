@@ -29,7 +29,9 @@ class Device < ActiveRecord::Base
     top_manufacturers.each do |company|
       companyfound = false
       final.each do |altcompany|
-        if (company[:label].start_with?(altcompany[:label]))
+        companyname = company[:label].downcase.gsub(/[^a-z\s]/, '')
+        altcompanyname = altcompany[:label].downcase.gsub(/[^a-z\s]/, '')
+        if (companyname.start_with?(altcompanyname) || altcompanyname.start_with?(companyname))
           altcompany[:value] += company[:value]
           companyfound = true
         end
