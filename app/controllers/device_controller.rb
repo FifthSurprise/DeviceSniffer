@@ -36,7 +36,8 @@ class DeviceController < ApplicationController
             if (rssi > 35)
               puts ("Found Kevin!!!!")
               # puts ("Device is #{d.macaddress}")
-              # puts ("AP is #{apmac} to replace #{d.accesspoint}")
+              puts ("AP is #{apmac} to replace #{d.accesspoint}")
+              
 
               Movements.create(:macaddress => mac, :velocity => (Time.now.to_i - d.updated_at.to_i)/60/100)
               puts ("Difference is #{(Time.now.to_i - d.updated_at.to_i)}")
