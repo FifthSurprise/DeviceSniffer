@@ -33,7 +33,7 @@ class Device < ActiveRecord::Base
         altcompanyname = altcompany[:label].downcase.gsub(/[^a-z\s]/, '')
         if (companyname.start_with?(altcompanyname) || 
           altcompanyname.start_with?(companyname) ||
-          (altcompany.name.start_with?("samsung")&& company.name.start_with?("samsung")))
+          (altcompanyname.start_with?("samsung") && companyname.start_with?("samsung")))
           altcompany[:value] += company[:value]
           companyfound = true
         end
