@@ -17,17 +17,28 @@ class Device < ActiveRecord::Base
   def self.manufacturers_dashboard
     top_manufacturers = []
     Device.where("company != ''").group(:company).count.each do |key,value|
-      if (value>100)
+      if (value>0)
         top_manufacturers.push({:label=> key, :value => value})
       end
     end
     top_manufacturers.sort!{|a,b| b[:value] <=> a[:value]}
     # top_manufacturers.push(Device.where("company != ''").group(:company).count.delete_if{|key,value| value<0})
     final = []
+    #iterate through array of the manufacturers sorted
+    #manufacturers have a label and a value
     top_manufacturers.each do |company|
-
+      companyfound = false
+      final.each do |altcompany|
+        if (company[:label].start_with?(altcompany[:label]))
+          altcompany[:value] += company[:value]
+          companyfound = true
+        end
+      end
+      unless companyfound
+        final.push(company)
+      end
     end
-    return top_manufacturers
+    return final
   end
 
   def self.total_Count
