@@ -34,6 +34,7 @@ class DeviceController < ApplicationController
           if (mac == "5C:0A:5B:4D:B9:72".downcase && d.accesspoint != apmac)
             puts ("Found Kevin!!!!")
             puts ("Device is #{d.macaddress}")
+            puts ("AP is #{apmac}")
             Movement.create(:macaddress => mac,
                             :velocity => (Time.now - d.updated_at)/60/100)
           end
