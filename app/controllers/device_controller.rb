@@ -42,7 +42,7 @@ class DeviceController < ApplicationController
           d.updated_at = Time.now
           d.updates+=1
           d.save
-          puts ("Final is #{d})
+          puts ("Final is #{d}")
         end
       end
       # logger.info "client #{c['client_mac']} seen on ap #{c['ap_mac']} with rssi #{c['rssi']} at #{c['last_seen']}"
