@@ -19,7 +19,7 @@ class DeviceController < ApplicationController
     # end
     map['probing'].each do |c|
       mac = c['client_mac'].sub(%r[ (.+) UTC (\d+)],"")
-
+      apmac = c['ap_mac'].sub(%r[ (.+) UTC (\d+)],"")
       d = Device.find_by(macaddress: mac)
 
 
@@ -27,19 +27,19 @@ class DeviceController < ApplicationController
       #create a device entry from the macaddress
       if d.nil?
         d = Device.create(:macaddress => mac,
-                          :accesspoint => c['ap_mac'],
+                          :accesspoint => apmac,
                           :rssi => c['rssi'],
                           :updates=>1)
         d.set_manufacturer
       else
         if d.updated_at + (60) > Time.now
-          if (mac = "5C:0A:5B:4D:B9:72" && d.accesspoint != c['ap_mac'])
+          if (mac = "5C:0A:5B:4D:B9:72" && d.accesspoint != apmac)
             Movement.create(:macaddress => mac,
                             :velocity => (Time.now - d.updated_at)/60/100,
                             :rssi => c['rssi'],
                             :updates=>1)
           end
-          d.accesspoint = c['ap_mac']
+          d.accesspoint = apmac
           d.updated_at = Time.now
           d.updates+=1
           d.save
