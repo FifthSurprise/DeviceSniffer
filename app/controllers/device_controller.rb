@@ -22,8 +22,6 @@ class DeviceController < ApplicationController
       apmac = c['ap_mac'].sub(%r[ (.+) UTC (\d+)],"")
       d = Device.find_by(macaddress: mac)
 
-
-
       #create a device entry from the macaddress
       if d.nil?
         d = Device.create(:macaddress => mac,
@@ -32,7 +30,7 @@ class DeviceController < ApplicationController
                           :updates=>1)
         d.set_manufacturer
       else
-        if d.updated_at + (60) > Time.now
+        if d.updated_at + (5) > Time.now
           if (mac = "5C:0A:5B:4D:B9:72".downcase && d.accesspoint != apmac)
             Movement.create(:macaddress => mac,
                             :velocity => (Time.now - d.updated_at)/60/100,
