@@ -23,6 +23,10 @@ class Device < ActiveRecord::Base
     end
     top_manufacturers.sort!{|a,b| b[:value] <=> a[:value]}
     # top_manufacturers.push(Device.where("company != ''").group(:company).count.delete_if{|key,value| value<0})
+    final = []
+    top_manufacturers.each do |company|
+
+    end
     return top_manufacturers
   end
 
@@ -37,30 +41,30 @@ class Device < ActiveRecord::Base
   def self.companies
     Device.select("company").group("company").map{ |i| i.company }.compact
   end
-  
+
   def self.reset_visits
     Device.update_all(updates: 1)
   end
-  
+
   def set_manufacturer
     if self.company.nil? || self.company == ""
       self.company = self.get_manufacturer
     end
-    
+
     #in case the above code fails to find the company then company will be ""
-    if self.company == "" 
+    if self.company == ""
       self.company = self.get_manufacturer_from_site
     end
-    
+
     self.save if self.company_changed?
   end
-  
+
   def get_manufacturer
     uri = URI.parse("http://www.macvendorlookup.com/api/v2/#{self.macaddress}")
     response = Net::HTTP.get_response(uri)
     response.code != "200" ? "" : JSON.parse(response.body).first["company"]
   end
-  
+
   def get_manufacturer_from_site
     agent = Mechanize.new
 
@@ -87,7 +91,14 @@ class Device < ActiveRecord::Base
     File.open("lib/naming/names.txt", "a") do |file|
       file.write(name + "\n")
     end
-    
     name
   end
+
+  #Working on scraping from router for those joining flatiron guest
+  # https://n74.meraki.com/The-Flatiron-Sch/n/3uhZbbkb/manage/usage/logins?ssid=0&timespan=2592000
+  # def self.parse_latest_router
+  #   agent = Mechanize.new
+  #   page = agent.get("https://n74.meraki.com/The-Flatiron-Sch/n/3uhZbbkb/manage/usage/logins?ssid=0&timespan=2592000")
+
+  # end
 end
