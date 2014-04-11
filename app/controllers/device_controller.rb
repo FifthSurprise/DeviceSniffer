@@ -39,7 +39,7 @@ class DeviceController < ApplicationController
               puts ("AP is #{apmac} to replace #{d.accesspoint}")
 
 
-              Movements.create(:macaddress => mac, :velocity => (Time.now.to_i - d.updated_at.to_i)/60/100)
+              Movements.create(:macaddress => mac, :velocity => (Time.now.to_i - d.updated_at.to_i)/60.0/25.0)
               puts ("Difference is #{(Time.now.to_i - d.updated_at.to_i)}")
               puts ("Speed is #{(Time.now.to_i - d.updated_at.to_i)/60/100}")
             end
