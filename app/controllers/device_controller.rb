@@ -43,7 +43,7 @@ class DeviceController < ApplicationController
               puts ("Speed is #{(Time.now.to_i - d.updated_at.to_i)/60/100}")
             end
           end
-          d.accesspoint = apmac
+          d.accesspoint = apmac if d.accesspoint != apmac
           d.updated_at = Time.now
           d.updates+=1
           d.save
