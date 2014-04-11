@@ -5,7 +5,7 @@ require 'json'
 
 current_valuation = 0
 
-Dashing.scheduler.every '5s' do
+Dashing.scheduler.every '10s' do
   last_valuation = current_valuation
   current_valuation = rand(100)
 
@@ -24,5 +24,5 @@ Dashing.scheduler.every '5s' do
 end
 Dashing.scheduler.every '30s' do
   Dashing.send_event('kcspeed', { text: "#{Movements.last.velocity} meters/second"})
-  
+
 end
