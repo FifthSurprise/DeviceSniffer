@@ -17,7 +17,7 @@ Dashing.scheduler.every '5s' do
   company = d.company !="" ? d.company : "Device Manufacturer Not Found"
   Dashing.send_event('last_MAC', { text: "#{company}",
                                    moreinfo: "MAC Address: #{d.macaddress}"})
-
+  Dashing.send_event('last_MAC', { text: "#{Movements.last.velocity} meters/second"})
   #top_manufacturers  = [{:label=>"Apple", :value=>50}, { :label=>"HTC", :value=>20}, {:label=>'Samsung', :value=>22}]
   # top_manufacturers=[]
   top_manufacturers=Device.manufacturers_dashboard
