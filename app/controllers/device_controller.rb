@@ -17,7 +17,7 @@ class DeviceController < ApplicationController
     #   logger.warn "got post with bad secret: #{SECRET}"
     #   return
     # end
-    map['probing'].each do |c|
+      map['probing'].each do |c|
       mac = c['client_mac'].sub(%r[ (.+) UTC (\d+)],"")
       apmac = c['ap_mac'].sub(%r[ (.+) UTC (\d+)],"")
       d = Device.find_by(macaddress: mac)
