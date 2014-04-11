@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'postevent' => 'device#postevent'
 
   get 'events' => 'device#events'
-  get 'movement' => 'movement#index'
+  get 'movement' => 'movements#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
