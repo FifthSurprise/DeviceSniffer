@@ -33,18 +33,18 @@ class DeviceController < ApplicationController
       else
         if d.updated_at + (5) < Time.now
           if (mac == "5C:0A:5B:4D:B9:72".downcase && d.accesspoint != apmac)
-            if (rssi > 35)
+            if (rssi.to_i > 35)
               puts ("Found Kevin!!!!")
               # puts ("Device is #{d.macaddress}")
               puts ("AP is #{apmac} to replace #{d.accesspoint}")
-              
+
 
               Movements.create(:macaddress => mac, :velocity => (Time.now.to_i - d.updated_at.to_i)/60/100)
               puts ("Difference is #{(Time.now.to_i - d.updated_at.to_i)}")
               puts ("Speed is #{(Time.now.to_i - d.updated_at.to_i)/60/100}")
             end
           end
-          d.accesspoint = apmac if d.accesspoint != apmac
+          d.accesspoint = apmac 
           d.updated_at = Time.now
           d.updates+=1
           d.save
