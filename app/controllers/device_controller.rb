@@ -20,25 +20,28 @@ class DeviceController < ApplicationController
     map['probing'].each do |c|
       mac = c['client_mac'].sub(%r[ (.+) UTC (\d+)],"").gsub("\"","")
       apmac = c['ap_mac'].sub(%r[ (.+) UTC (\d+)],"").gsub("\"","")
+      rssi = c['rssi']
       d = Device.find_by(macaddress: mac)
       # puts ("looking at #{mac}")
       #create a device entry from the macaddress
       if d.nil?
         d = Device.create(:macaddress => mac,
                           :accesspoint => apmac,
-                          :rssi => c['rssi'],
+                          :rssi => rssi,
                           :updates=>1)
         d.set_manufacturer
       else
         if d.updated_at + (60) < Time.now
           if (mac == "5C:0A:5B:4D:B9:72".downcase && d.accesspoint != apmac)
-            puts ("Found Kevin!!!!")
-            # puts ("Device is #{d.macaddress}")
-            # puts ("AP is #{apmac} to replace #{d.accesspoint}")
+            if (rssi > 35)
+              puts ("Found Kevin!!!!")
+              # puts ("Device is #{d.macaddress}")
+              # puts ("AP is #{apmac} to replace #{d.accesspoint}")
 
-            Movements.create(:macaddress => mac, :velocity => (Time.now.to_i - d.updated_at.to_i)/60/100)
-            puts ("Difference is #{(Time.now.to_i - d.updated_at.to_i)}")
-            puts ("Speed is #{(Time.now.to_i - d.updated_at.to_i)/60/100}")
+              Movements.create(:macaddress => mac, :velocity => (Time.now.to_i - d.updated_at.to_i)/60/100)
+              puts ("Difference is #{(Time.now.to_i - d.updated_at.to_i)}")
+              puts ("Speed is #{(Time.now.to_i - d.updated_at.to_i)/60/100}")
+            end
           end
           d.accesspoint = apmac
           d.updated_at = Time.now
