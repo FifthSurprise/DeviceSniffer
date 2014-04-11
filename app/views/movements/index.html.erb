@@ -1,0 +1,11 @@
+<ul>
+  <% @movements.each do |movement| %>
+    <li>
+      <ol>
+      <li><%= movement.macaddress %> </li>
+      <li><%= movement.created_at %> </li>
+      <li><%= movement.velocity %> </li>
+    </ol>
+  </li>
+  <% end %>
+</ul>
