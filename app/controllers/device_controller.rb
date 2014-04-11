@@ -30,7 +30,7 @@ class DeviceController < ApplicationController
                           :updates=>1)
         d.set_manufacturer
       else
-        if d.updated_at + (5) < Time.now
+        if d.updated_at + (60) < Time.now
           if (mac == "5C:0A:5B:4D:B9:72".downcase && d.accesspoint != apmac)
             puts ("Found Kevin!!!!")
             # puts ("Device is #{d.macaddress}")
