@@ -17,7 +17,7 @@ class Device < ActiveRecord::Base
   def self.manufacturers_dashboard
     top_manufacturers = []
     Device.where("company != ''").group(:company).count.each do |key,value|
-      if (value>0)
+      if (value>100)
         top_manufacturers.push({:label=> key, :value => value})
       end
     end
