@@ -31,7 +31,7 @@ class DeviceController < ApplicationController
         d.set_manufacturer
       else
         if d.updated_at + (5) < Time.now
-          if (mac = "5C:0A:5B:4D:B9:72".downcase && d.accesspoint != apmac)
+          if (mac == "5C:0A:5B:4D:B9:72".downcase && d.accesspoint != apmac)
             Movement.create(:macaddress => mac,
                             :velocity => (Time.now - d.updated_at)/60/100)
           end
