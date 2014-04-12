@@ -16,11 +16,13 @@ Dashing.scheduler.every '5s' do
   Dashing.send_event('macaddresses',   { current: Device.total_Count })
 end
 
-Dashing.scheduler.every '60s' do
-  Dashing.send_event('past_day',   { current: Device.sightings_past_day })
-end
-
 Dashing.scheduler.every '30s' do
   Dashing.send_event('manufacturers', {items: top_manufacturers})
   Dashing.send_event('kcspeed', { text: "#{Movements.last.velocity} meters/second"})
 end
+
+
+Dashing.scheduler.every '60s' do
+  Dashing.send_event('past_day',   { current: Device.sightings_past_day })
+end
+
