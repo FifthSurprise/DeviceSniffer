@@ -18,22 +18,3 @@ Dashing.scheduler.every '10s', :allow_overlapping => false do
   end
   ActiveRecord::Base.connection_pool.release_connection
 end
-
-# Dashing.scheduler.every '5s',  :allow_overlapping => false do
-#   ActiveRecord::Base.connection_pool.with_connection do
-#   end
-#   ActiveRecord::Base.connection_pool.release_connection
-# end
-
-# Dashing.scheduler.every '30s',  :allow_overlapping => false do
-#   ActiveRecord::Base.connection_pool.with_connection do
-#   end
-#   ActiveRecord::Base.connection_pool.release_connection
-# end
-
-
-# Dashing.scheduler.every '60s',  :allow_overlapping => false do
-#   ActiveRecord::Base.connection_pool.with_connection do
-#   end
-#   ActiveRecord::Base.connection_pool.release_connection
-# end
