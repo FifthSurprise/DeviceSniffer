@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'dashing-rails'
 gem 'puma'
-gem 'delayed_job'
+gem 'delayed_job_active_record'
 gem 'rspec-rails'
 
 ruby "2.1.0"

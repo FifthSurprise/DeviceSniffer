@@ -65,6 +65,9 @@ GEM
     debug_inspector (0.0.2)
     delayed_job (4.0.1)
       activesupport (>= 3.0, < 4.2)
+    delayed_job_active_record (4.0.1)
+      activerecord (>= 3.0, < 4.2)
+      delayed_job (>= 3.0, < 4.1)
     devise (3.2.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -235,7 +238,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dashing-rails
   database_cleaner
-  delayed_job
+  delayed_job_active_record
   devise
   factory_girl_rails
   faker
