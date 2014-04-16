@@ -3,7 +3,6 @@ require 'net/http'
 require 'json'
 
 Dashing.scheduler.every '10s', :allow_overlapping => false do
-  ActiveRecord::Base.connection_pool.clear_stale_cached_connections!
   ActiveRecord::Base.connection_pool.with_connection do
     Dashing.send_event('past_hour',   { value: Device.sightings_past_hour })
 
