@@ -1,5 +1,24 @@
 Notes
 
+
+
+notes on distance via router
+
+Data accumulated:
+mac address
+access point that saw it
+timestamp
+RSSI - Signal strength
+
+I am at device A.  Signal strength is > than something
+
+
+Pick the second to last AP that saw a mac.
+Then get the second to last AP that saw the mac right after it.
+
+
+
+
 -  Get column in device for ignore
 -  Dashboard objects based upon time (how many in last hour, last day, overall)
 -  Make user table/objects for when users show up
